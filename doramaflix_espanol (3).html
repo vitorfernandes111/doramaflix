@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DoramaFLIX</title>
+<link rel="preconnect" href="https://i.imgur.com">
+<style>
+:root{--red:#8b1cf0;--darkred:#3d0a66;--yellow:#ffd400;--black:#050505;--card:#111;--text:#fff}
+*{box-sizing:border-box;margin:0;padding:0;scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#050505;color:#fff;overflow-x:hidden}
+.wrap{width:min(1180px,92%);margin:auto}
+.alert{background:#ffd400;color:#090909;text-align:center;padding:11px;font-weight:900;font-size:14px}
+.hero{min-height:90vh;display:flex;align-items:center;position:relative;background:radial-gradient(circle at 80% 25%,#3d0a6666,transparent 35%),linear-gradient(120deg,#050505 35%,#1a0030)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#050505 0%,transparent 55%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:60px 0;position:relative;z-index:2}
+.logo{display:inline-block;font-family:Arial,Helvetica,sans-serif;font-weight:1000;font-size:clamp(34px,4.2vw,48px);letter-spacing:-1.5px;text-transform:uppercase;color:#8b1cf0;text-shadow:2px 2px 0 #3d0a66,0 8px 22px #8b1cf066;transform:scaleY(1.18);transform-origin:left center;margin-bottom:35px;line-height:1}
+.footer-logo{transform:scaleY(1.12);transform-origin:center;font-size:28px;display:inline-block;margin:0 auto 15px}
+.tag{display:inline-block;background:#8b1cf0;border:2px solid #ffd400;border-radius:999px;padding:8px 15px;font-weight:900;font-size:12px;margin-bottom:18px}
+h1{font-size:clamp(43px,6vw,78px);line-height:.94;letter-spacing:-3px;text-transform:uppercase;font-weight:1000}
+.yellow{color:#ffd400;text-shadow:0 3px #3d0a66}
+.hero p{font-size:20px;color:#ddd;line-height:1.5;margin:24px 0;max-width:650px}
+.cta{display:inline-block;background:linear-gradient(#a83bff,#6a0fc4);color:#fff;text-decoration:none;text-transform:uppercase;font-weight:1000;font-size:19px;padding:19px 28px;border:2px solid #ffd400;border-radius:12px;box-shadow:0 14px 45px #8b1cf055;animation:pulse 1.7s infinite;text-align:center}
+@keyframes pulse{50%{transform:scale(1.035);box-shadow:0 15px 55px #8b1cf088}}
+.hero-covers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;transform:rotate(2deg)}
+.hero-covers img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;border:2px solid #ffd400;box-shadow:0 12px 35px #000}
+section{padding:75px 0}
+.title{text-align:center;font-size:clamp(32px,4vw,52px);font-weight:1000;text-transform:uppercase;line-height:1;margin-bottom:14px}
+.sub{text-align:center;color:#bbb;font-size:18px;max-width:760px;margin:0 auto 40px}
+.catalog{background:#0b0b0b}
+.catalog-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;max-height:800px;overflow:hidden;position:relative}
+.catalog-grid:after{content:"";position:absolute;left:0;right:0;bottom:0;height:220px;background:linear-gradient(transparent,#0b0b0b)}
+.catalog-grid img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;border:1px solid #333;transition:.25s}
+.catalog-grid img:hover{transform:scale(1.05);border-color:#ffd400}
+.testimonials{background:radial-gradient(circle at 50% 50%,#50000055,transparent 55%);overflow:hidden}
+.happy{text-align:center;color:#ffd400;font-size:30px;font-weight:1000;margin-top:35px}
+
+/* ===== Carrossel de depoimentos ===== */
+.rail-viewport{width:100%;overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);touch-action:pan-y;cursor:grab}
+.rail-viewport.dragging{cursor:grabbing}
+.rail-viewport + .rail-viewport{margin-top:18px}
+.rail-track{display:flex;gap:18px;width:max-content;will-change:transform}
+.rail-track.dir-left{animation:railLeft 55s linear infinite}
+.rail-track.dir-right{animation:railRight 55s linear infinite}
+.rail-viewport:hover .rail-track,.rail-track.paused{animation-play-state:paused}
+@keyframes railLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes railRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+.rcard{flex:0 0 auto;width:300px;background:#151515;border-radius:16px;border:1px solid #8b1cf040;box-shadow:0 10px 25px #00000066;padding:24px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;user-select:none}
+.rcard:hover{transform:translateY(-6px);border-color:#8b1cf0;box-shadow:0 16px 35px #8b1cf033}
+.rcard-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.avatar{width:44px;height:44px;min-width:44px;border-radius:50%;background:#2a2a2a;border:2px solid #888;color:#888;display:flex;align-items:center;justify-content:center;font-weight:1000;font-size:18px}
+.rcard-name{font-weight:900;font-size:15px;color:#fff}
+.stars{color:#ffd400;font-size:15px;letter-spacing:2px;margin-bottom:10px}
+.rtext{font-size:14.5px;line-height:1.55;color:#ddd}
+
+@media(max-width:800px){
+.rcard{width:78vw}
+}
+.plans{background:#090909}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;max-width:900px;margin:auto;align-items:stretch}
+.plan{background:linear-gradient(145deg,#171717,#080808);border:2px solid #444;border-radius:22px;padding:34px;position:relative}
+.plan.premium{border:3px solid #ffd400;background:linear-gradient(145deg,#4b0f80,#140021);box-shadow:0 0 60px #8b1cf044;transform:scale(1.04)}
+.best{position:absolute;top:-17px;left:50%;transform:translateX(-50%);background:#ffd400;color:#000;padding:8px 17px;border-radius:999px;font-weight:1000;white-space:nowrap}
+.plan h3{font-size:30px;margin-bottom:15px}
+.price{font-size:55px;font-weight:1000;color:#ffd400;margin:10px 0} .price small{font-size:20px;color:#fff}
+.old{text-decoration:line-through;color:#aaa}
+.plan ul{list-style:none;margin:25px 0} .plan li{padding:10px 0;border-bottom:1px solid #333;font-weight:700} .plan li:before{content:"✓ ";color:#ffd400}
+.plan .cta{width:100%}
+.final{text-align:center;background:linear-gradient(#5b12a3,#170027);border-top:4px solid #ffd400}
+.final h2{font-size:clamp(38px,5vw,65px);font-weight:1000;text-transform:uppercase;line-height:1;margin-bottom:25px}
+footer{padding:30px;text-align:center;color:#777}
+.mobile{display:none}
+@media(max-width:800px){
+.hero-grid{grid-template-columns:1fr;padding:40px 0 65px}.hero-covers{grid-template-columns:repeat(3,1fr)}h1{font-size:45px}.hero p{font-size:17px}
+.catalog-grid{grid-template-columns:repeat(3,1fr);max-height:650px}.plan-grid{grid-template-columns:1fr}.plan.premium{transform:none;margin-top:15px}
+.cta{width:100%;font-size:16px}.mobile{display:block;position:fixed;bottom:0;left:0;right:0;background:#050505ee;border-top:2px solid #ffd400;padding:9px 14px;z-index:50}.mobile .cta{padding:13px;font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="alert">🔥 OFERTA ESPECIAL • PAGO ÚNICO • ACCESO DE POR VIDA 🔥</div>
+<header class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="logo">DoramaFLIX</div>
+<div class="tag">❤️ PARA QUIENES AMAN LOS DORAMAS</div>
+<h1>DISFRUTA DORAMAS <span class="yellow">SIN LÍMITES</span></h1>
+<p>Sin anuncios ni cuotas mensuales. Elige tu acceso y disfruta de una plataforma creada para los amantes de los doramas.</p>
+<a href="#planos" class="cta">QUIERO MI ACCESO AHORA →</a>
+</div>
+<div class="hero-covers">
+<img src="https://postimg.cc/VrcZYWhN" alt="Dorama"><img src="https://postimg.cc/34HfKFqD" alt="Dorama"><img src="https://postimg.cc/WFPY2wyk" alt="Dorama"><img src="https://postimg.cc/8JVX1mYJ" alt="Dorama"><img src="https://postimg.cc/zbSt3Rm3" alt="Dorama"><img src="https://postimg.cc/FdgW1Jt7" alt="Dorama">
+</div>
+</div>
+</header>
+
+<section class="catalog">
+<div class="wrap">
+<h2 class="title">DORAMAS PARA TI <span class="yellow">MARATONEAR ❤️</span></h2>
+<p class="sub">Descubre algunos de los títulos destacados.</p>
+<div class="catalog-grid"><img src="https://postimg.cc/hfjzGJNp" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/47bLnhCY" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/S27Tjz0X" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/FdgW1Jt7" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/zbSt3Rm3" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/8JVX1mYJ" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/WFPY2wyk" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/34HfKFqD" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/VrcZYWhN" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://postimg.cc/1ftnzgbd" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/COVZNpQ.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/VtbQa2g.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/qaLMzbw.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/h8d7G2Z.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/L5NyB2l.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/kJwq37D.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/9GcpuIb.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/jDZlnF1.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/C75nvSQ.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/RpMDX3K.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/TgHCWvA.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/IMKIhnH.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/pI8DzUR.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/DMEAQuK.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/EPFfylZ.jpeg" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/Dwuk52Y.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/ieLLWPN.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/Hk2QuJA.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/m8QjS1M.png" alt="Dorama disponível na plataforma" loading="lazy">
+<img src="https://i.imgur.com/EvMQBXe.png" alt="Dorama disponível na plataforma" loading="lazy"></div>
+</div>
+</section>
+
+<section class="testimonials">
+<div class="wrap">
+<h2 class="title">⭐ LO QUE DICEN NUESTROS <span class="yellow">CLIENTES</span></h2>
+<p class="sub">Miles de personas ya están disfrutando de sus doramas favoritos.</p>
+</div>
+
+<div class="rail-viewport" id="railTop">
+<div class="rail-track dir-left" id="railTopTrack">
+<div class="rcard"><div class="rcard-top"><div class="avatar">M</div><div class="rcard-name">María G. 🇲🇽</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Compré el acceso y en pocos minutos ya estaba viendo mis doramas favoritos. Todo salió perfecto. 🥰</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Camila R. 🇨🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Me encantó. Ya terminé dos series y esta noche voy por otra.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">V</div><div class="rcard-name">Valentina L. 🇵🇪</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">La mejor compra que hice este mes. Estoy haciendo maratón todos los días. ❤️</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">D</div><div class="rcard-name">Daniela P. 🇨🇱</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El acceso llegó muy rápido. Todo fue sencillo y ya estoy disfrutando de la plataforma.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">L</div><div class="rcard-name">Lucía T. 🇺🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Muy recomendado. Hay muchísimas opciones para elegir.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">F</div><div class="rcard-name">Fernanda A. 🇪🇨</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Pensé que sería complicado, pero fue muy fácil. Todo funciona excelente.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">S</div><div class="rcard-name">Sofía M. 🇦🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">No puedo creer la cantidad de doramas que hay, no sé ni por dónde empezar 😂</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">I</div><div class="rcard-name">Isabella V. 🇪🇸</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Llevo toda la semana viendo series sin parar, vale totalmente la pena.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">G</div><div class="rcard-name">Gabriela N. 🇧🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El pago fue súper rápido y en segundos ya tenía acceso a todo.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Antonella F. 🇨🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Encontré series que no había visto en ningún otro lado. Feliz con la compra ✨</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">R</div><div class="rcard-name">Renata S. 🇩🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Excelente calidad de imagen, se ve todo clarísimo.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">J</div><div class="rcard-name">Josefina C. 🇵🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Compartí con mi hermana y ahora las dos estamos enganchadas.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">X</div><div class="rcard-name">Ximena O. 🇬🇹</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Superó mis expectativas, pensé que iba a ser solo unas pocas series y hay demasiadas.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Andrea B. 🇲🇽</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Justo lo que buscaba, ahora veo mis doramas sin anuncios molestos.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">P</div><div class="rcard-name">Paula H. 🇨🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El soporte respondió rapidísimo cuando tuve una duda.</p></div>
+<!-- duplicado para loop infinito -->
+<div class="rcard"><div class="rcard-top"><div class="avatar">M</div><div class="rcard-name">María G. 🇲🇽</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Compré el acceso y en pocos minutos ya estaba viendo mis doramas favoritos. Todo salió perfecto. 🥰</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Camila R. 🇨🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Me encantó. Ya terminé dos series y esta noche voy por otra.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">V</div><div class="rcard-name">Valentina L. 🇵🇪</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">La mejor compra que hice este mes. Estoy haciendo maratón todos los días. ❤️</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">D</div><div class="rcard-name">Daniela P. 🇨🇱</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El acceso llegó muy rápido. Todo fue sencillo y ya estoy disfrutando de la plataforma.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">L</div><div class="rcard-name">Lucía T. 🇺🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Muy recomendado. Hay muchísimas opciones para elegir.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">F</div><div class="rcard-name">Fernanda A. 🇪🇨</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Pensé que sería complicado, pero fue muy fácil. Todo funciona excelente.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">S</div><div class="rcard-name">Sofía M. 🇦🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">No puedo creer la cantidad de doramas que hay, no sé ni por dónde empezar 😂</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">I</div><div class="rcard-name">Isabella V. 🇪🇸</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Llevo toda la semana viendo series sin parar, vale totalmente la pena.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">G</div><div class="rcard-name">Gabriela N. 🇧🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El pago fue súper rápido y en segundos ya tenía acceso a todo.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Antonella F. 🇨🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Encontré series que no había visto en ningún otro lado. Feliz con la compra ✨</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">R</div><div class="rcard-name">Renata S. 🇩🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Excelente calidad de imagen, se ve todo clarísimo.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">J</div><div class="rcard-name">Josefina C. 🇵🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Compartí con mi hermana y ahora las dos estamos enganchadas.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">X</div><div class="rcard-name">Ximena O. 🇬🇹</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Superó mis expectativas, pensé que iba a ser solo unas pocas series y hay demasiadas.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Andrea B. 🇲🇽</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Justo lo que buscaba, ahora veo mis doramas sin anuncios molestos.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">P</div><div class="rcard-name">Paula H. 🇨🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El soporte respondió rapidísimo cuando tuve una duda.</p></div>
+</div>
+</div>
+
+<div class="rail-viewport" id="railBottom">
+<div class="rail-track dir-right" id="railBottomTrack">
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Carolina D. 🇵🇪</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">100% recomendado, ya voy por mi tercera serie esta semana 🍿</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">M</div><div class="rcard-name">Martina Z. 🇦🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Nunca pensé que pagaría solo una vez y tendría acceso para siempre.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Constanza R. 🇨🇱</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Cada dorama que busco lo encuentro, es una locura la variedad.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">E</div><div class="rcard-name">Emilia J. 🇺🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Excelente relación precio-calidad, lo recomiendo con los ojos cerrados.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Alejandra K. 🇪🇨</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">La app carga rápido y no se traba, muy buena experiencia.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">N</div><div class="rcard-name">Natalia W. 🇪🇸</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Estoy fascinada, hace días que no salgo de casa por ver series 😍</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">V</div><div class="rcard-name">Victoria Q. 🇧🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El proceso de compra fue clarísimo, en minutos ya estaba adentro.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">F</div><div class="rcard-name">Florencia I. 🇨🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Mis amigas me recomendaron esto y no me arrepiento para nada.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">M</div><div class="rcard-name">Milagros E. 🇩🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Tiene subtítulos perfectos, se entiende todo sin problema.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Agustina U. 🇵🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Pagué una sola vez y tengo acceso de por vida, un negociazo.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Catalina Y. 🇬🇹</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Encontré todos los doramas que estaba buscando hace tiempo 👏</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">J</div><div class="rcard-name">Julieta P. 🇲🇽</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">La calidad Full HD se nota muchísimo, se ve hermoso en la tele.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Antonia L. 🇨🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Ya recomendé esto a todo mi grupo de amigas.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">R</div><div class="rcard-name">Rocío M. 🇵🇪</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Cumplió todo lo que prometía, estoy súper contenta.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Abril S. 🇦🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El mejor gasto que hice en mucho tiempo, disfruto cada noche 🥰</p></div>
+<!-- duplicado para loop infinito -->
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Carolina D. 🇵🇪</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">100% recomendado, ya voy por mi tercera serie esta semana 🍿</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">M</div><div class="rcard-name">Martina Z. 🇦🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Nunca pensé que pagaría solo una vez y tendría acceso para siempre.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Constanza R. 🇨🇱</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Cada dorama que busco lo encuentro, es una locura la variedad.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">E</div><div class="rcard-name">Emilia J. 🇺🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Excelente relación precio-calidad, lo recomiendo con los ojos cerrados.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Alejandra K. 🇪🇨</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">La app carga rápido y no se traba, muy buena experiencia.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">N</div><div class="rcard-name">Natalia W. 🇪🇸</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Estoy fascinada, hace días que no salgo de casa por ver series 😍</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">V</div><div class="rcard-name">Victoria Q. 🇧🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El proceso de compra fue clarísimo, en minutos ya estaba adentro.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">F</div><div class="rcard-name">Florencia I. 🇨🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Mis amigas me recomendaron esto y no me arrepiento para nada.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">M</div><div class="rcard-name">Milagros E. 🇩🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Tiene subtítulos perfectos, se entiende todo sin problema.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Agustina U. 🇵🇾</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Pagué una sola vez y tengo acceso de por vida, un negociazo.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">C</div><div class="rcard-name">Catalina Y. 🇬🇹</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Encontré todos los doramas que estaba buscando hace tiempo 👏</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">J</div><div class="rcard-name">Julieta P. 🇲🇽</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">La calidad Full HD se nota muchísimo, se ve hermoso en la tele.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Antonia L. 🇨🇴</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Ya recomendé esto a todo mi grupo de amigas.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">R</div><div class="rcard-name">Rocío M. 🇵🇪</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">Cumplió todo lo que prometía, estoy súper contenta.</p></div>
+<div class="rcard"><div class="rcard-top"><div class="avatar">A</div><div class="rcard-name">Abril S. 🇦🇷</div></div><div class="stars">⭐⭐⭐⭐⭐</div><p class="rtext">El mejor gasto que hice en mucho tiempo, disfruto cada noche 🥰</p></div>
+</div>
+</div>
+
+<div class="wrap"><div class="happy">❤️ +10.000 clientes felices</div></div>
+</section>
+
+<section class="plans" id="planos">
+<div class="wrap">
+<h2 class="title">ELIGE TU <span class="yellow">ACCESO</span></h2>
+<p class="sub">Pago único. Elige el plan ideal para ti.</p>
+<div class="plan-grid">
+<div class="plan">
+<h3>🌙 Plan Básico</h3>
+<div class="price"><small>US$</small> 5</div>
+<p>pago único</p>
+<ul>
+<li>Catálogo con 300 doramas</li>
+<li>Pago único</li>
+<li>Calidad Full HD</li>
+<li>Acceso a la plataforma</li>
+</ul>
+<a href="#" class="cta">COMPRAR PLAN BÁSICO</a>
+</div>
+<div class="plan premium">
+<div class="best">🔥 MÁS ELEGIDO</div>
+<h3>❤️ Plan Premium</h3>
+<div class="old">US$ 14.90</div>
+<div class="price"><small>US$</small> 8.90</div>
+<p><b>Pago único vitalício</b></p>
+<ul>
+<li>Catálogo completo con +1500 doramas</li>
+<li>Acceso de por vida</li>
+<li>Calidad Full HD</li>
+<li>Experiencia completa de la plataforma</li>
+</ul>
+<a href="#" class="cta">QUIERO EL PREMIUM ❤️</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="final">
+<div class="wrap">
+<h2>DISFRUTA LO MEJOR DE LOS DORAMAS <span class="yellow">¡AHORA MISMO!</span></h2>
+<p class="sub" style="color:#fff">Promoción por tiempo limitado.</p>
+<a href="#planos" class="cta">QUIERO MI ACCESO AHORA →</a>
+</div>
+</section>
+<footer><div class="logo footer-logo">DoramaFLIX</div><br>© 2026 DoramaFLIX • Todos los derechos reservados.</footer>
+<div class="mobile"><a href="#planos" class="cta">🔥 VER OFERTAS DESDE US$5</a></div>
+
+<script>
+(function(){
+  function enableDrag(viewportId, trackId){
+    var viewport = document.getElementById(viewportId);
+    var track = document.getElementById(trackId);
+    if(!viewport || !track) return;
+
+    var isDown = false, startX = 0, startOffset = 0, currentX = 0;
+
+    function getTranslateX(el){
+      var st = window.getComputedStyle(el);
+      var m = st.transform;
+      if(m === 'none') return 0;
+      var values = m.match(/matrix.*\((.+)\)/);
+      if(!values) return 0;
+      var parts = values[1].split(', ');
+      return parseFloat(parts[4] || parts[12] || 0);
+    }
+
+    function pointerDown(x){
+      isDown = true;
+      viewport.classList.add('dragging');
+      track.classList.add('paused');
+      startX = x;
+      startOffset = getTranslateX(track);
+      track.style.transform = 'translateX(' + startOffset + 'px)';
+    }
+    function pointerMove(x){
+      if(!isDown) return;
+      currentX = x;
+      var delta = currentX - startX;
+      track.style.transform = 'translateX(' + (startOffset + delta) + 'px)';
+    }
+    function pointerUp(){
+      if(!isDown) return;
+      isDown = false;
+      viewport.classList.remove('dragging');
+      // Retoma a animação automática a partir da posição atual
+      track.style.transform = '';
+      track.classList.remove('paused');
+    }
+
+    // Mouse
+    viewport.addEventListener('mousedown', function(e){ pointerDown(e.clientX); });
+    window.addEventListener('mousemove', function(e){ pointerMove(e.clientX); });
+    window.addEventListener('mouseup', pointerUp);
+
+    // Touch
+    viewport.addEventListener('touchstart', function(e){ pointerDown(e.touches[0].clientX); }, {passive:true});
+    viewport.addEventListener('touchmove', function(e){ pointerMove(e.touches[0].clientX); }, {passive:true});
+    viewport.addEventListener('touchend', pointerUp);
+    viewport.addEventListener('touchcancel', pointerUp);
+  }
+
+  enableDrag('railTop', 'railTopTrack');
+  enableDrag('railBottom', 'railBottomTrack');
+})();
+</script>
+</body>
+</html>
